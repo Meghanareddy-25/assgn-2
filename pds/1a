@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+
+# load the diabetes data
+diabetes = pd.read_csv('diabetes.csv')
+
+# set a seed for reproducibility
+random.seed(123)
+
+# take a random sample of 25 observations
+sample = diabetes.sample(n=25)
+
+# calculate the mean and highest glucose values of the sample
+sample_mean = sample['Glucose'].mean()
+sample_highest = sample['Glucose'].max()
+
+# calculate the population mean and highest glucose values
+population_mean = diabetes['Glucose'].mean()
+population_highest = diabetes['Glucose'].max()
+
+# plot the comparison between the sample and population means and highest values
+fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+axs[0].bar(['Sample Mean', 'Population Mean'], [sample_mean, population_mean])
+axs[0].set_title('Comparison of Sample and Population Means')
+axs[1].bar(['Sample Highest', 'Population Highest'], [sample_highest, population_highest])
+axs[1].set_title('Comparison of Sample and Population Highest Values')
+plt.show()
